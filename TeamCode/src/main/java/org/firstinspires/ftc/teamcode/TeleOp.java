@@ -18,10 +18,12 @@ public class TeleOp extends OpMode {
 
     DcMotor motorRight;
     DcMotor motorLeft;
-     Servo gripperRight;
-      Servo gripperLeft;
-      DcMotor motorElevator;
-   Servo servoRightArm;
+    DcMotor motorFront;
+    DcMotor motorBack;
+//     Servo gripperRight;
+//      Servo gripperLeft;
+//      DcMotor motorElevator;
+//   Servo servoRightArm;
 
     /**
      * Constructor
@@ -40,10 +42,12 @@ public class TeleOp extends OpMode {
 
         motorRight = hardwareMap.dcMotor.get("motorRight");
         motorLeft = hardwareMap.dcMotor.get("motorLeft");
-      gripperRight = hardwareMap.servo.get("gripperRight");//
-      gripperLeft = hardwareMap.servo.get("gripperLeft");//
-        motorElevator = hardwareMap.dcMotor.get("motorElevator");
-        servoRightArm = hardwareMap.servo.get("servoRightArm");//
+        motorFront = hardwareMap.dcMotor.get("motorFront");
+        motorBack = hardwareMap.dcMotor.get("motorBack");
+//      gripperRight = hardwareMap.servo.get("gripperRight");//
+//      gripperLeft = hardwareMap.servo.get("gripperLeft");//
+//        motorElevator = hardwareMap.dcMotor.get("motorElevator");
+//        servoRightArm = hardwareMap.servo.get("servoRightArm");//
 
 
         //port 1 is gripperleft
@@ -66,8 +70,8 @@ public class TeleOp extends OpMode {
         // y equals -1 means the joystick is pushed all of the way forward.
         //x equals -1 means the joystick 0is pushed all the way to the left.
 
-        float elevator = -gamepad2.right_stick_y;
-        float launcher = gamepad2.left_stick_y;
+//        float elevator = -gamepad2.right_stick_y;
+//        float launcher = gamepad2.left_stick_y;
         float throttle = -gamepad1.left_stick_x;
 
 
@@ -84,15 +88,15 @@ public class TeleOp extends OpMode {
         //gripperRight.scaleRange();
 
 
-        if (gamepad2.dpad_down) {
-           gripperRight.setPosition(1);
-          gripperLeft.setPosition(0);
-
-        } else if (gamepad2.dpad_up) {
-           gripperRight.setPosition(0);
-            gripperLeft.setPosition(1);
-
-        }
+//        if (gamepad2.dpad_down) {
+//           gripperRight.setPosition(1);
+//          gripperLeft.setPosition(0);
+//
+//        } else if (gamepad2.dpad_up) {
+//           gripperRight.setPosition(0);
+//            gripperLeft.setPosition(1);
+//
+//        }
 
 
 
