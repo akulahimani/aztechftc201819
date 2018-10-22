@@ -16,10 +16,10 @@ import static java.lang.Thread.sleep;
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Teleop", group="Pushbot")
 public class TeleOp extends OpMode {
 
-    DcMotor motorRight;
-    DcMotor motorLeft;
-    DcMotor motorFront;
-    DcMotor motorBack;
+    DcMotor motorRightFront;
+    DcMotor motorLeftFront;
+    DcMotor motorRightBack;
+    DcMotor motorLeftBack;
 //     Servo gripperRight;
 //      Servo gripperLeft;
 //      DcMotor motorElevator;
@@ -40,10 +40,10 @@ public class TeleOp extends OpMode {
     @Override
     public void init() {
 
-        motorRight = hardwareMap.dcMotor.get("motorRight");
-        motorLeft = hardwareMap.dcMotor.get("motorLeft");
-        motorFront = hardwareMap.dcMotor.get("motorFront");
-        motorBack = hardwareMap.dcMotor.get("motorBack");
+        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
 //      gripperRight = hardwareMap.servo.get("gripperRight");//
 //      gripperLeft = hardwareMap.servo.get("gripperLeft");//
 //        motorElevator = hardwareMap.dcMotor.get("motorElevator");
@@ -62,9 +62,9 @@ public class TeleOp extends OpMode {
     @Override
     public void loop() {
 
-		/*
-		 * Gamepad 1 controls the drive motors.
-		 */
+        /*
+         * Gamepad 1 controls the drive motors.
+         */
 
         // tank drive
         // y equals -1 means the joystick is pushed all of the way forward.
@@ -122,10 +122,12 @@ public class TeleOp extends OpMode {
 
         // write the values to the motors
 //        motorRight.setPower(0.6*right);
-        motorRight.setPower(1 * right);
+        motorRightFront.setPower(1 * right);
+        motorRightBack.setPower(1*right);
 
 //        motorLeft.setPower(0.6*left);
-        motorLeft.setPower(1 * left);
+        motorLeftFront.setPower(1 * left);
+        motorLeftBack.setPower(1*left);
 
 //        motorElevator.setPower(.50 * elevatorthrottle);
 //        motorElevator.setPower(.50 * elevatorthrottleReverse);
@@ -142,8 +144,8 @@ public class TeleOp extends OpMode {
 
 
 
-       // telemetry.addData("elevator power", elevatorthrottle);
-       // telemetry.addData("servo power", servopower);
+    // telemetry.addData("elevator power", elevatorthrottle);
+    // telemetry.addData("servo power", servopower);
 
 
 //        motorLaunchL.setPower(launcher);
@@ -152,15 +154,15 @@ public class TeleOp extends OpMode {
 //        motorElevator.setPower(elevator);
 
 
-		/*
-		 * Send telemetry data back to driver station. Note that if we are using
-		 * a legacy NXT-compatible motor controller, then the getPower() method
-		 * will return a null value. The legacy NXT-compatible motor controllers
-		 * are currently write only.
-		 * *telemetry.addData("Text", "*** Robot Data***");
-		 * *telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-		 * *telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
-		 */
+    /*
+     * Send telemetry data back to driver station. Note that if we are using
+     * a legacy NXT-compatible motor controller, then the getPower() method
+     * will return a null value. The legacy NXT-compatible motor controllers
+     * are currently write only.
+     * *telemetry.addData("Text", "*** Robot Data***");
+     * *telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
+     * *telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+     */
 
 
 
