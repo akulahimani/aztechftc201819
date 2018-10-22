@@ -49,7 +49,7 @@ public class TeleOp extends OpMode {
 //        motorElevator = hardwareMap.dcMotor.get("motorElevator");
 //        servoRightArm = hardwareMap.servo.get("servoRightArm");//
 
-
+        //General Descriptions
         //port 1 is gripperleft
         //port 2 is gripperRight
 
