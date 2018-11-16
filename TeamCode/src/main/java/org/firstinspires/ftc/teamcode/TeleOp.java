@@ -52,6 +52,10 @@ public class TeleOp extends OpMode {
         //General Descriptions
         //port 1 is gripperleft
         //port 2 is gripperRight
+        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
 
 
     }
@@ -72,17 +76,12 @@ public class TeleOp extends OpMode {
 
 //        float elevator = -gamepad2.right_stick_y;
 //        float launcher = gamepad2.left_stick_y;
-        float direction = gamepad1.left_stick_x;
-
-
-
-
-
-        float throttle = -gamepad1.right_stick_y;
+        double throttle = -gamepad1.left_stick_y;
+        double direction = gamepad1.right_stick_x;
        // float elevatorthrottle = -gamepad2.right_stick_y;
       //  float elevatorthrottleReverse = gamepad2.left_stick_y;
-        float right = throttle - direction;
-        float left = (throttle + direction);
+        double right = throttle - direction;
+        double left = (throttle + direction);
 
 
         //gripperRight.scaleRange();
@@ -122,23 +121,22 @@ public class TeleOp extends OpMode {
 
         // write the values to the motors
 //        motorRight.setPower(0.6*right);
-        if(throttle < 0) {
-            motorRightFront.setPower(-1 * right);
+            motorRightFront.setPower(1 * right);
             motorRightBack.setPower(1*right);
 
 //        motorLeft.setPower(0.6*left);
-            motorLeftFront.setPower(-1 * left);
+            motorLeftFront.setPower(1 * left);
             motorLeftBack.setPower(1*left);
-        }
 
-        if(direction> 0) {
-            motorRightFront.setPower(1 * right);
-            motorRightBack.setPower(-1*right);
 
-//        motorLeft.setPower(0.6*left);
-            motorLeftFront.setPower(-1 * left);
-            motorLeftBack.setPower(1*left);
-        }
+//        if(direction> 0) {
+//            motorRightFront.setPower(1 * right);
+//            motorRightBack.setPower(-1*right);
+//
+////        motorLeft.setPower(0.6*left);
+//            motorLeftFront.setPower(-1 * left);
+//            motorLeftBack.setPower(1*left);
+//        }
 
 
 //        motorElevator.setPower(.50 * elevatorthrottle);
