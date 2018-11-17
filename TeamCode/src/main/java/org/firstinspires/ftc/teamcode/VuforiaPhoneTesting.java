@@ -40,6 +40,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.disnodeteam.dogecv.CameraViewDisplay;
+import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.detectors.roverrukus.GoldDetector;
+import com.disnodeteam.dogecv.filters.HSVColorFilter;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -49,6 +57,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +100,11 @@ public class VuforiaPhoneTesting extends OpMode
     private OpenGLMatrix lastLocation = null;
     boolean targetVisible;
     Dogeforia vuforia;
-    WebcamName webcamName;
     List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
 
     GoldAlignDetector detector;
+    private SamplingOrderDetector detector2;
+
 
     @Override
     public void init() {
@@ -235,6 +245,9 @@ public class VuforiaPhoneTesting extends OpMode
 
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
+
+        telemetry.addData("Current Order" , detector2.getCurrentOrder().toString()); // The current result for the frame
+        telemetry.addData("Last Order" , detector2.getLastOrder().toString()); // The last known result
 
         telemetry.update();
 
