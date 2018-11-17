@@ -121,8 +121,8 @@ public class TeleOp extends OpMode {
 
         // write the values to the motors
 //        motorRight.setPower(0.6*right);
-            motorRightFront.setPower(1 * right);
-            motorRightBack.setPower(1*right);
+            motorRightFront.setPower(0.85 * right);
+            motorRightBack.setPower(0.85*right);
 
 //        motorLeft.setPower(0.6*left);
             motorLeftFront.setPower(1 * left);

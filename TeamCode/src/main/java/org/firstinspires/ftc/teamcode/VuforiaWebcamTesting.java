@@ -97,7 +97,6 @@ public class VuforiaWebcamTesting extends OpMode
 
     @Override
     public void init() {
-        webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());

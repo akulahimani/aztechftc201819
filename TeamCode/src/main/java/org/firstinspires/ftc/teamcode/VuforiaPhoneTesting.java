@@ -168,6 +168,16 @@ public class VuforiaPhoneTesting extends OpMode
         detector.yellowFilter = new LeviColorFilter(LeviColorFilter.ColorPreset.YELLOW, 100);
         detector.useDefaults();
         detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        detector.alignSize = 100; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+        detector.downscale = 0.4; // How much to downscale the input frames
+        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        detector.maxAreaScorer.weight = 0.005;
+
+        detector.ratioScorer.weight = 5;
+        detector.ratioScorer.perfectRatio = 1.0;
+
+        detector.enable();
         //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
         vuforia.setDogeCVDetector(detector);
         vuforia.enableDogeCV();
@@ -223,6 +233,8 @@ public class VuforiaPhoneTesting extends OpMode
             telemetry.addData("Visible Target", "none");
         }
 
+        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
+        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
 
         telemetry.update();
 
