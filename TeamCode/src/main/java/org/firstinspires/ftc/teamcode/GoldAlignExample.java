@@ -36,18 +36,44 @@ import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.configuration.annotations.AnalogSensorType;
+
+import static java.lang.Thread.sleep;
 
 
 @Autonomous(name="GoldAlign Example", group="DogeCV")
 
 public class GoldAlignExample extends OpMode
 {
-    private GoldAlignDetector detector;
-
+    public GoldAlignDetector detector;
+    DcMotor motorRightFront;
+    DcMotor motorLeftFront;
+    DcMotor motorRightBack;
+    DcMotor motorLeftBack;
 
     @Override
     public void init() {
+        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+//      gripperRight = hardwareMap.servo.get("gripperRight");//
+//      gripperLeft = hardwareMap.servo.get("gripperLeft");//
+//        motorElevator = hardwareMap.dcMotor.get("motorElevator");
+//        servoRightArm = hardwareMap.servo.get("servoRightArm");//
+
+        //General Descriptions
+        //port 1 is gripperleft
+        //port 2 is gripperRight
+        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+
+
+
+
         telemetry.addData("Status", "DogeCV 2018.0 - Gold Align Example");
 
         detector = new GoldAlignDetector();
@@ -56,11 +82,11 @@ public class GoldAlignExample extends OpMode
 
         // Optional Tuning
         detector.alignSize = 100; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
-        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+        detector.alignPosOffset = 35; // How far from center frame to offset this alignment zone.
         detector.downscale = 0.4; // How much to downscale the input frames
 
-        detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
-        //detector.perfectAreaScorer.perfectArea = 10000; // if using PERFECT_AREA scoring
+        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+        detector.perfectAreaScorer.perfectArea = 1000; // if using PERFECT_AREA scoring
         detector.maxAreaScorer.weight = 0.005;
 
         detector.ratioScorer.weight = 5;
@@ -81,13 +107,102 @@ public class GoldAlignExample extends OpMode
     @Override
     public void start() {
 
+   motorRightFront.setPower(0.25);
+   motorRightBack.setPower(0.25);
+   motorLeftBack.setPower(-0.25);
+   motorLeftFront.setPower(-0.25);
+        try {
+            sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+        motorLeftBack.setPower(0);
+        motorLeftFront.setPower(0);
+
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        motorRightFront.setPower(0.25);
+        motorRightBack.setPower(0.25);
+        motorLeftBack.setPower(0.25);
+        motorLeftFront.setPower(0.25);
+
+        try {
+            sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        while(detector.getAligned() == false) {
+            motorRightFront.setPower(-0.25);
+            motorRightBack.setPower(-0.25);
+            motorLeftBack.setPower(0.25);
+            motorLeftFront.setPower(0.25);
+
+            try {
+                sleep(75);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            motorRightFront.setPower(0);
+            motorRightBack.setPower(0);
+            motorLeftBack.setPower(0);
+            motorLeftFront.setPower(0);
+
+            try {
+                sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        if(detector.getAligned() == true ) {
+
+            motorRightFront.setPower(0);
+            motorRightBack.setPower(0);
+            motorLeftBack.setPower(0);
+            motorLeftFront.setPower(0);
+
+            try {
+                sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if(detector.getAligned() == true) {
+                motorRightFront.setPower(0.25);
+                motorRightBack.setPower(0.25);
+                motorLeftBack.setPower(0.25);
+                motorLeftFront.setPower(0.25);
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
 
 
+        }
     }
+
+
 
 
     @Override
     public void loop() {
+
+
+
+
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
     }
