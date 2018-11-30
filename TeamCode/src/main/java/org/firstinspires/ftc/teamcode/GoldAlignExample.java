@@ -138,30 +138,30 @@ public class GoldAlignExample extends OpMode
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        while(detector.getAligned() == false) {
-            motorRightFront.setPower(-0.25);
-            motorRightBack.setPower(-0.25);
-            motorLeftBack.setPower(0.25);
-            motorLeftFront.setPower(0.25);
-
-            try {
-                sleep(75);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            motorRightFront.setPower(0);
-            motorRightBack.setPower(0);
-            motorLeftBack.setPower(0);
-            motorLeftFront.setPower(0);
-
-            try {
-                sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
+//        while(detector.getAligned() == false) {
+//            motorRightFront.setPower(-0.25);
+//            motorRightBack.setPower(-0.25);
+//            motorLeftBack.setPower(0.25);
+//            motorLeftFront.setPower(0.25);
+//
+//            try {
+//                sleep(75);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            motorRightFront.setPower(0);
+//            motorRightBack.setPower(0);
+//            motorLeftBack.setPower(0);
+//            motorLeftFront.setPower(0);
+//
+//            try {
+//                sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
 
         if(detector.getAligned() == true ) {
 
