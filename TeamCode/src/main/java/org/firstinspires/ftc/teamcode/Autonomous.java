@@ -106,9 +106,9 @@ public class Autonomous extends OpMode {
             turnLeftbyDistance(secondTurnBack);
             driveForwardTargetDistance(fourthStraightDistance);
             ballGrabber1.setPosition(1);
-            ballGrabber2.setPosition(1);
-            ballGrabber1.setPosition(0);
             ballGrabber2.setPosition(0);
+            ballGrabber1.setPosition(0);
+            ballGrabber2.setPosition(1);
             turnLeftbyDistance(thirdTurnBack);
             driveForwardTargetDistance(fifthStraightDistance);
 
@@ -131,9 +131,9 @@ public class Autonomous extends OpMode {
                 turnLeftbyDistance(secondTurnBack);
                 driveForwardTargetDistance(fourthStraightDistance);
                 ballGrabber1.setPosition(1);
-                ballGrabber2.setPosition(1);
-                ballGrabber1.setPosition(0);
                 ballGrabber2.setPosition(0);
+                ballGrabber1.setPosition(0);
+                ballGrabber2.setPosition(1);
                 turnLeftbyDistance(thirdTurnBack);
                 driveForwardTargetDistance(fifthStraightDistance);
             }
@@ -152,10 +152,12 @@ public class Autonomous extends OpMode {
                     turnLeftbyDistance(secondTurntoLeft);
                     turnLeftbyDistance(turnBack);
                     driveForwardTargetDistance(thirdStraightDistance);
+                    turnLeftbyDistance(secondTurnBack);
+                    driveForwardTargetDistance(fourthStraightDistance);
                     ballGrabber1.setPosition(1);
-                    ballGrabber2.setPosition(1);
-                    ballGrabber1.setPosition(0);
                     ballGrabber2.setPosition(0);
+                    ballGrabber1.setPosition(0);
+                    ballGrabber2.setPosition(1);
                     turnLeftbyDistance(thirdTurnBack);
                     driveForwardTargetDistance(fifthStraightDistance);
                 }
@@ -170,6 +172,11 @@ public class Autonomous extends OpMode {
 
         telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
         telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
+        telemetry.addData("Left Back Motor Position", motorLeftBack.getCurrentPosition());
+        telemetry.addData("Left Front Motor Position", motorLeftFront.getCurrentPosition());
+        telemetry.addData("Right Back Motor Position", motorRightBack.getCurrentPosition());
+        telemetry.addData("Right Front Motor Position", motorRightFront.getCurrentPosition());
+
     }
 
     @Override
