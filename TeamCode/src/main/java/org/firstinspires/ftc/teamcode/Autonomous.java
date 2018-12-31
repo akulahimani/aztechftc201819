@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import static java.lang.Thread.sleep;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group = "Pushbot")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous1", group = "Pushbot")
 public class Autonomous extends OpMode {
 
     public GoldAlignDetector detector;
@@ -84,7 +84,9 @@ public class Autonomous extends OpMode {
         double turnBack = 0;
         double thirdStraightDistance = 0;
         double secondTurnBack = 0;
+        double thirdTurnBack = 0;
         double fourthStraightDistance = 0;
+        double fifthStraightDistance = 0;
 
         driveForwardTargetDistance(firstStraightDistance);
         turnLeftbyDistance(firstTurntoLeft);
@@ -101,12 +103,14 @@ public class Autonomous extends OpMode {
             turnRightbyDistance(secondTurntoRight);
             turnLeftbyDistance(turnBack);
             driveForwardTargetDistance(thirdStraightDistance);
+            turnLeftbyDistance(secondTurnBack);
+            driveForwardTargetDistance(fourthStraightDistance);
             ballGrabber1.setPosition(1);
             ballGrabber2.setPosition(1);
             ballGrabber1.setPosition(0);
             ballGrabber2.setPosition(0);
-            turnRightbyDistance(secondTurnBack);
-            driveForwardTargetDistance(fourthStraightDistance);
+            turnLeftbyDistance(thirdTurnBack);
+            driveForwardTargetDistance(fifthStraightDistance);
 
 
         }
@@ -124,12 +128,14 @@ public class Autonomous extends OpMode {
                 driveBackwardTargetDistance(firstReverseDistance);
                 turnLeftbyDistance(turnBack);
                 driveForwardTargetDistance(thirdStraightDistance);
+                turnLeftbyDistance(secondTurnBack);
+                driveForwardTargetDistance(fourthStraightDistance);
                 ballGrabber1.setPosition(1);
                 ballGrabber2.setPosition(1);
                 ballGrabber1.setPosition(0);
                 ballGrabber2.setPosition(0);
-                turnRightbyDistance(secondTurnBack);
-                driveForwardTargetDistance(fourthStraightDistance);
+                turnLeftbyDistance(thirdTurnBack);
+                driveForwardTargetDistance(fifthStraightDistance);
             }
             else {
                 turnRightbyDistance(firstTurntoRight);
@@ -150,9 +156,8 @@ public class Autonomous extends OpMode {
                     ballGrabber2.setPosition(1);
                     ballGrabber1.setPosition(0);
                     ballGrabber2.setPosition(0);
-                    turnRightbyDistance(secondTurnBack);
-                    driveForwardTargetDistance(fourthStraightDistance);
-
+                    turnLeftbyDistance(thirdTurnBack);
+                    driveForwardTargetDistance(fifthStraightDistance);
                 }
             }
         }

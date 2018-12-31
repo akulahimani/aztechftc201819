@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import static java.lang.Thread.sleep;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousWithoutMarker", group = "Pushbot")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous1WithoutMarker", group = "Pushbot")
 public class Autonomous2 extends OpMode {
 
     public GoldAlignDetector detector;

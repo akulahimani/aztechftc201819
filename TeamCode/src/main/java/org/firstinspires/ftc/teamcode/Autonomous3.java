@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import static java.lang.Thread.sleep;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousWithoutPark", group = "Pushbot")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous1WithoutPark", group = "Pushbot")
 public class Autonomous3 extends OpMode {
 
     public GoldAlignDetector detector;
@@ -98,6 +98,8 @@ public class Autonomous3 extends OpMode {
             turnRightbyDistance(secondTurntoRight);
             turnLeftbyDistance(turnBack);
             driveForwardTargetDistance(thirdStraightDistance);
+            turnLeftbyDistance(secondTurnBack);
+            driveForwardTargetDistance(fourthStraightDistance);
             ballGrabber1.setPosition(1);
             ballGrabber2.setPosition(1);
             ballGrabber1.setPosition(0);
@@ -121,6 +123,8 @@ public class Autonomous3 extends OpMode {
                 driveBackwardTargetDistance(firstReverseDistance);
                 turnLeftbyDistance(turnBack);
                 driveForwardTargetDistance(thirdStraightDistance);
+                turnLeftbyDistance(secondTurnBack);
+                driveForwardTargetDistance(fourthStraightDistance);
                 ballGrabber1.setPosition(1);
                 ballGrabber2.setPosition(1);
                 ballGrabber1.setPosition(0);
@@ -143,6 +147,8 @@ public class Autonomous3 extends OpMode {
                     turnLeftbyDistance(secondTurntoLeft);
                     turnLeftbyDistance(turnBack);
                     driveForwardTargetDistance(thirdStraightDistance);
+                    turnLeftbyDistance(secondTurnBack);
+                    driveForwardTargetDistance(fourthStraightDistance);
                     ballGrabber1.setPosition(1);
                     ballGrabber2.setPosition(1);
                     ballGrabber1.setPosition(0);
