@@ -20,6 +20,13 @@ public class TeleOp extends OpMode {
     DcMotor motorLeftFront;
     DcMotor motorRightBack;
     DcMotor motorLeftBack;
+    DcMotor cascadeLiftMotor;
+//    DcMotor scissorLiftMotor;
+    DcMotor ballRotater;
+    DcMotor ballPuller;
+//    DcMotor spoolMotor;
+    Servo ballGrabber;
+
 //     Servo gripperRight;
 //      Servo gripperLeft;
 //      DcMotor motorElevator;
@@ -44,6 +51,13 @@ public class TeleOp extends OpMode {
         motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
         motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
         motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+        cascadeLiftMotor = hardwareMap.dcMotor.get("cascadeLiftMotor");
+//        scissorLiftMotor = hardwareMap.dcMotor.get("scissorLiftMotor");
+        ballRotater = hardwareMap.dcMotor.get("ballRotater");
+        ballPuller = hardwareMap.dcMotor.get("ballPuller");
+//        spoolMotor = hardwareMap.dcMotor.get("spoolMotor");
+        ballGrabber = hardwareMap.servo.get("ballGrabber");
+
 //      gripperRight = hardwareMap.servo.get("gripperRight");//
 //      gripperLeft = hardwareMap.servo.get("gripperLeft");//
 //        motorElevator = hardwareMap.dcMotor.get("motorElevator");
@@ -56,8 +70,11 @@ public class TeleOp extends OpMode {
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
         motorRightFront.setDirection(DcMotor.Direction.FORWARD);
         motorRightBack.setDirection(DcMotor.Direction.FORWARD);
-
-
+        cascadeLiftMotor.setDirection(DcMotor.Direction.FORWARD);
+//        scissorLiftMotor.setDirection(DcMotor.Direction.FORWARD);
+        ballRotater.setDirection(DcMotor.Direction.REVERSE);
+        ballPuller.setDirection(DcMotor.Direction.FORWARD);
+//        spoolMotor.setDirection(DcMotor.Direction.FORWARD);
     }
 
     /*
@@ -78,6 +95,18 @@ public class TeleOp extends OpMode {
 //        float launcher = gamepad2.left_stick_y;
         double throttle = -gamepad1.left_stick_y;
         double direction = gamepad1.right_stick_x;
+        double cascadeLift = gamepad2.left_stick_y;
+//        double scissorLift = gamepad2.right_stick_y;
+        double rotate = gamepad2.left_stick_x;
+        double pull = gamepad2.right_stick_x;
+//        double spoolPower = gamepad2.right_stick_x;
+        if(gamepad2.dpad_up == true) {
+            ballGrabber.setPosition(0);
+        }
+        else if(gamepad2.dpad_down == true) {
+            ballGrabber.setPosition(1);
+        }
+
        // float elevatorthrottle = -gamepad2.right_stick_y;
       //  float elevatorthrottleReverse = gamepad2.left_stick_y;
         double right = throttle - direction;
@@ -106,7 +135,11 @@ public class TeleOp extends OpMode {
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
-
+        cascadeLift = Range.clip(cascadeLift, -1, 1);
+//        scissorLift = Range.clip(scissorLift, -1, 1);
+        rotate = Range.clip(rotate, -1, 1);
+        pull = Range.clip(pull, -1, 1);
+//        spoolPower = Range.clip(spoolPower, -1, 1);
 //        brush = Range.clip(brush, -1, 1);
 //        elevator = Range.clip(elevator, -1, 1);
 //        launcher = Range.clip(launcher, -1, 1);
@@ -115,6 +148,8 @@ public class TeleOp extends OpMode {
         // the robot more precisely at slower speeds.
         right = (float) scaleInput(right);
         left = (float) scaleInput(left);
+
+
 //        brush = (float)scaleInput(brush);
 //        elevator = (float)scaleInput(elevator);
 //        launcher = (float)scaleInput(launcher);
@@ -127,6 +162,13 @@ public class TeleOp extends OpMode {
 //        motorLeft.setPower(0.6*left);
             motorLeftFront.setPower(1 * left);
             motorLeftBack.setPower(1*left);
+
+//            scissorLiftMotor.setPower(1*scissorLift);
+            cascadeLiftMotor.setPower(1*cascadeLift);
+
+//            spoolMotor.setPower(1*spoolPower);
+            ballRotater.setPower(1*rotate);
+            ballPuller.setPower(1*pull);
 
 
 //        if(direction> 0) {

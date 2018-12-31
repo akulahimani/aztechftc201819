@@ -2,18 +2,15 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
-import com.disnodeteam.dogecv.DogeCV;
-import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import static java.lang.Thread.sleep;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous", group = "Pushbot")
-public class Autonomous extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousWithoutMarker", group = "Pushbot")
+public class Autonomous2 extends OpMode {
 
     public GoldAlignDetector detector;
     public double encoderCounts = 537.6;
@@ -78,6 +75,7 @@ public class Autonomous extends OpMode {
         double turnBacktoCenter = 0;
         double firstTurntoRight = 0;
         double secondStraightDistance = 0;
+        double distanceForPitParking = 0;
         double firstReverseDistance = 0;
         double secondTurntoLeft = 0;
         double secondTurntoRight = 0;
@@ -97,16 +95,17 @@ public class Autonomous extends OpMode {
 
         if(detector.getAligned() == true) {
             driveForwardTargetDistance(secondStraightDistance);
-            driveBackwardTargetDistance(firstReverseDistance);
-            turnRightbyDistance(secondTurntoRight);
-            turnLeftbyDistance(turnBack);
-            driveForwardTargetDistance(thirdStraightDistance);
-            ballGrabber1.setPosition(1);
-            ballGrabber2.setPosition(1);
-            ballGrabber1.setPosition(0);
-            ballGrabber2.setPosition(0);
-            turnRightbyDistance(secondTurnBack);
-            driveForwardTargetDistance(fourthStraightDistance);
+            driveForwardTargetDistance(distanceForPitParking);
+//            driveBackwardTargetDistance(firstReverseDistance);
+//            turnRightbyDistance(secondTurntoRight);
+//            turnLeftbyDistance(turnBack);
+//            driveForwardTargetDistance(thirdStraightDistance);
+//            ballGrabber1.setPosition(1);
+//            ballGrabber2.setPosition(1);
+//            ballGrabber1.setPosition(0);
+//            ballGrabber2.setPosition(0);
+//            turnRightbyDistance(secondTurnBack);
+//            driveForwardTargetDistance(fourthStraightDistance);
 
 
         }
@@ -121,15 +120,16 @@ public class Autonomous extends OpMode {
 
             if(detector.getAligned() == true) {
                 driveForwardTargetDistance(secondStraightDistance);
-                driveBackwardTargetDistance(firstReverseDistance);
-                turnLeftbyDistance(turnBack);
-                driveForwardTargetDistance(thirdStraightDistance);
-                ballGrabber1.setPosition(1);
-                ballGrabber2.setPosition(1);
-                ballGrabber1.setPosition(0);
-                ballGrabber2.setPosition(0);
-                turnRightbyDistance(secondTurnBack);
-                driveForwardTargetDistance(fourthStraightDistance);
+                driveForwardTargetDistance(distanceForPitParking);
+//                driveBackwardTargetDistance(firstReverseDistance);
+//                turnLeftbyDistance(turnBack);
+//                driveForwardTargetDistance(thirdStraightDistance);
+//                ballGrabber1.setPosition(1);
+//                ballGrabber2.setPosition(1);
+//                ballGrabber1.setPosition(0);
+//                ballGrabber2.setPosition(0);
+//                turnRightbyDistance(secondTurnBack);
+//                driveForwardTargetDistance(fourthStraightDistance);
             }
             else {
                 turnRightbyDistance(firstTurntoRight);
@@ -142,16 +142,17 @@ public class Autonomous extends OpMode {
 
                 if(detector.getAligned() == true) {
                     driveForwardTargetDistance(secondStraightDistance);
-                    driveBackwardTargetDistance(firstReverseDistance);
-                    turnLeftbyDistance(secondTurntoLeft);
-                    turnLeftbyDistance(turnBack);
-                    driveForwardTargetDistance(thirdStraightDistance);
-                    ballGrabber1.setPosition(1);
-                    ballGrabber2.setPosition(1);
-                    ballGrabber1.setPosition(0);
-                    ballGrabber2.setPosition(0);
-                    turnRightbyDistance(secondTurnBack);
-                    driveForwardTargetDistance(fourthStraightDistance);
+                    driveForwardTargetDistance(distanceForPitParking);
+//                    driveBackwardTargetDistance(firstReverseDistance);
+//                    turnLeftbyDistance(secondTurntoLeft);
+//                    turnLeftbyDistance(turnBack);
+//                    driveForwardTargetDistance(thirdStraightDistance);
+//                    ballGrabber1.setPosition(1);
+//                    ballGrabber2.setPosition(1);
+//                    ballGrabber1.setPosition(0);
+//                    ballGrabber2.setPosition(0);
+//                    turnRightbyDistance(secondTurnBack);
+//                    driveForwardTargetDistance(fourthStraightDistance);
 
                 }
             }
