@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import static java.lang.Thread.sleep;
 
-
+@Disabled
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous1WithoutPark", group = "Pushbot")
 public class Autonomous3 extends OpMode {
 

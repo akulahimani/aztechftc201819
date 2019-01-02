@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import static java.lang.Thread.sleep;
 
 @Disabled
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous1WithoutMarker", group = "Pushbot")
-public class Autonomous2 extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Autonomous2", group = "Pushbot")
+public class Autonomous4 extends OpMode {
 
     public GoldAlignDetector detector;
     public double encoderCounts = 537.6;
@@ -76,7 +76,6 @@ public class Autonomous2 extends OpMode {
         double turnBacktoCenter = 0;
         double firstTurntoRight = 0;
         double secondStraightDistance = 0;
-        double distanceForPitParking = 0;
         double firstReverseDistance = 0;
         double secondTurntoLeft = 0;
         double secondTurntoRight = 0;
@@ -84,6 +83,8 @@ public class Autonomous2 extends OpMode {
         double thirdStraightDistance = 0;
         double secondTurnBack = 0;
         double fourthStraightDistance = 0;
+        double thirdTurnBack = 0;
+        double fifthStraightDistance = 0;
 
         driveForwardTargetDistance(firstStraightDistance);
         turnLeftbyDistance(firstTurntoLeft);
@@ -96,17 +97,18 @@ public class Autonomous2 extends OpMode {
 
         if(detector.getAligned() == true) {
             driveForwardTargetDistance(secondStraightDistance);
-            driveForwardTargetDistance(distanceForPitParking);
-//            driveBackwardTargetDistance(firstReverseDistance);
-//            turnRightbyDistance(secondTurntoRight);
-//            turnLeftbyDistance(turnBack);
-//            driveForwardTargetDistance(thirdStraightDistance);
-//            ballGrabber1.setPosition(1);
-//            ballGrabber2.setPosition(1);
-//            ballGrabber1.setPosition(0);
-//            ballGrabber2.setPosition(0);
-//            turnRightbyDistance(secondTurnBack);
-//            driveForwardTargetDistance(fourthStraightDistance);
+            driveBackwardTargetDistance(firstReverseDistance);
+            turnRightbyDistance(secondTurntoRight);
+            turnRightbyDistance(turnBack);
+            driveForwardTargetDistance(thirdStraightDistance);
+            turnLeftbyDistance(secondTurnBack);
+            driveForwardTargetDistance(fourthStraightDistance);
+            ballGrabber1.setPosition(1);
+            ballGrabber2.setPosition(0);
+            ballGrabber1.setPosition(0);
+            ballGrabber2.setPosition(1);
+            turnLeftbyDistance(thirdTurnBack);
+            driveForwardTargetDistance(fifthStraightDistance);
 
 
         }
@@ -121,16 +123,17 @@ public class Autonomous2 extends OpMode {
 
             if(detector.getAligned() == true) {
                 driveForwardTargetDistance(secondStraightDistance);
-                driveForwardTargetDistance(distanceForPitParking);
-//                driveBackwardTargetDistance(firstReverseDistance);
-//                turnLeftbyDistance(turnBack);
-//                driveForwardTargetDistance(thirdStraightDistance);
-//                ballGrabber1.setPosition(1);
-//                ballGrabber2.setPosition(1);
-//                ballGrabber1.setPosition(0);
-//                ballGrabber2.setPosition(0);
-//                turnRightbyDistance(secondTurnBack);
-//                driveForwardTargetDistance(fourthStraightDistance);
+                driveBackwardTargetDistance(firstReverseDistance);
+                turnRightbyDistance(turnBack);
+                driveForwardTargetDistance(thirdStraightDistance);
+                turnLeftbyDistance(secondTurnBack);
+                driveForwardTargetDistance(fourthStraightDistance);
+                ballGrabber1.setPosition(1);
+                ballGrabber2.setPosition(0);
+                ballGrabber1.setPosition(0);
+                ballGrabber2.setPosition(1);
+                turnLeftbyDistance(thirdTurnBack);
+                driveForwardTargetDistance(fifthStraightDistance);
             }
             else {
                 turnRightbyDistance(firstTurntoRight);
@@ -143,18 +146,18 @@ public class Autonomous2 extends OpMode {
 
                 if(detector.getAligned() == true) {
                     driveForwardTargetDistance(secondStraightDistance);
-                    driveForwardTargetDistance(distanceForPitParking);
-//                    driveBackwardTargetDistance(firstReverseDistance);
-//                    turnLeftbyDistance(secondTurntoLeft);
-//                    turnLeftbyDistance(turnBack);
-//                    driveForwardTargetDistance(thirdStraightDistance);
-//                    ballGrabber1.setPosition(1);
-//                    ballGrabber2.setPosition(1);
-//                    ballGrabber1.setPosition(0);
-//                    ballGrabber2.setPosition(0);
-//                    turnRightbyDistance(secondTurnBack);
-//                    driveForwardTargetDistance(fourthStraightDistance);
-
+                    driveBackwardTargetDistance(firstReverseDistance);
+                    turnLeftbyDistance(secondTurntoLeft);
+                    turnRightbyDistance(turnBack);
+                    driveForwardTargetDistance(thirdStraightDistance);
+                    turnLeftbyDistance(secondTurnBack);
+                    driveForwardTargetDistance(fourthStraightDistance);
+                    ballGrabber1.setPosition(1);
+                    ballGrabber2.setPosition(0);
+                    ballGrabber1.setPosition(0);
+                    ballGrabber2.setPosition(1);
+                    turnLeftbyDistance(thirdTurnBack);
+                    driveForwardTargetDistance(fifthStraightDistance);
                 }
             }
         }
@@ -171,6 +174,7 @@ public class Autonomous2 extends OpMode {
         telemetry.addData("Left Front Motor Position", motorLeftFront.getCurrentPosition());
         telemetry.addData("Right Back Motor Position", motorRightBack.getCurrentPosition());
         telemetry.addData("Right Front Motor Position", motorRightFront.getCurrentPosition());
+
     }
 
     @Override

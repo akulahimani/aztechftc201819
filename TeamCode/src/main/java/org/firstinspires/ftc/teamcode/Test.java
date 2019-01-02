@@ -6,10 +6,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp public class Test extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Rotating Balls into Lander Test", group="Pushbot")
+public class Test extends OpMode {
 
-    DcMotor m1;
-    DcMotor m2;
+//    DcMotor m1;
+//    DcMotor m2;
     Servo s1;
     Servo s2;
 
