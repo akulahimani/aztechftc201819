@@ -41,7 +41,7 @@ import com.qualcomm.robotcore.hardware.configuration.annotations.AnalogSensorTyp
 
 import static java.lang.Thread.sleep;
 
-
+public class GoldAlignExample
 @Autonomous(name="GoldAlign Example", group="DogeCV")
 
 public class GoldAlignExample extends OpMode

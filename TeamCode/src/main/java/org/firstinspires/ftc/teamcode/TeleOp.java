@@ -49,6 +49,13 @@ public class TeleOp extends OpMode {
 //        motorElevator = hardwareMap.dcMotor.get("motorElevator");
 //        servoRightArm = hardwareMap.servo.get("servoRightArm");//
 
+
+
+
+
+
+
+
         //General Descriptions
         //port 1 is gripperleft
         //port 2 is gripperRight
@@ -87,13 +94,13 @@ public class TeleOp extends OpMode {
         //gripperRight.scaleRange();
 
 
-//        if (gamepad2.dpad_down) {
+       if (gamepad2.dpad_down) {
 //           gripperRight.setPosition(1);
-//          gripperLeft.setPosition(0);
+          gripperLeft.setPosition(0);
 //
-//        } else if (gamepad2.dpad_up) {
+        } else if (gamepad2.dpad_up) {
 //           gripperRight.setPosition(0);
-//            gripperLeft.setPosition(1);
+            gripperLeft.setPosition(1);
 //
 //        }
 
