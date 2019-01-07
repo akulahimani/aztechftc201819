@@ -9,31 +9,56 @@ import com.qualcomm.robotcore.util.Range;
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Cascade Lift Test", group="Pushbot")
 public class Test3 extends OpMode {
 
-    DcMotor m1;
-//    DcMotor m2;
-//    Servo s1;
-////    Servo s2;
+    DcMotor motorLeftFront;
+    DcMotor motorLeftBack;
+    DcMotor motorRightFront;
+    DcMotor motorRightBack;
+    DcMotor m5;
+    Servo s1;
+   Servo s2;
 
 
     @Override
     public void init() {
-        m1 = hardwareMap.dcMotor.get("m1");
-//        m2 = hardwareMap.dcMotor.get("m2");
-//        s1 = hardwareMap.servo.get("s1");
-//        s2 = hardwareMap.servo.get("s2");
+        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+        m5 = hardwareMap.dcMotor.get("m5");
+
+        s1 = hardwareMap.servo.get("servo1");
+        s2 = hardwareMap.servo.get("servo2");
 
     }
 
     @Override
     public void loop() {
-        double m1power = -gamepad1.left_stick_y;
+        telemetry.addData("Motor Position", m5.getCurrentPosition());
+        double m5power = -gamepad1.left_stick_y;
 //       double m2power = -gamepad1.right_stick_y;
 
-        m1power = Range.clip(m1power, -1, 1);
+        m5power = Range.clip(m5power, -1, 1);
 //        m2power = Range.clip(m2power, -1, 1);
 
-        m1.setPower(m1power);
+        if(m5power >= 0) {
+            m5.setPower(0.75*m5power);
+        }
+
+        if(m5power < 0) {
+            m5.setPower(0.15*m5power);
+        }
 //        m2.setPower(m2power);
+
+        if(gamepad1.dpad_up) {
+            s1.setPosition(0.9);
+            s2.setPosition(0.1);
+        }
+
+        if(gamepad1.dpad_down) {
+            s1.setPosition(0.25);
+            s2.setPosition(0.75);
+        }
+
 
 //        if(gamepad1.left_stick_y < 0) {
 //            s1.setPosition(1);

@@ -27,13 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -47,7 +49,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import java.util.Locale;
 
 /**
- * {@link SensorBNO055IMU} gives a short demo on how to use the BNO055 Inertial Motion Unit (IMU) from AdaFruit.
+ * {@link AngleTest} gives a short demo on how to use the BNO055 Inertial Motion Unit (IMU) from AdaFruit.
  *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
@@ -55,15 +57,25 @@ import java.util.Locale;
  * @see <a href="http://www.adafruit.com/products/2472">Adafruit IMU</a>
  */
 @TeleOp(name = "Sensor: BNO055 IMU", group = "Sensor")
-@Disabled                            // Comment this out to add to the opmode list
-public class SensorBNO055IMU extends LinearOpMode
+                            // Comment this out to add to the opmode list
+public class AngleTest extends LinearOpMode
     {
     //----------------------------------------------------------------------------------------------
     // State
     //----------------------------------------------------------------------------------------------
 
+        static final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
+        static final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.
+
+        static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
+        static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
+        static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
+
     // The IMU sensor object
     BNO055IMU imu;
+
+//    DcMotor leftDrive;
+//    DcMotor rightDrive;
 
     // State used for updating telemetry
     Orientation angles;
@@ -170,6 +182,8 @@ public class SensorBNO055IMU extends LinearOpMode
                                     + gravity.zAccel*gravity.zAccel));
                     }
                 });
+
+
     }
 
         public double getHeading() {
@@ -177,14 +191,73 @@ public class SensorBNO055IMU extends LinearOpMode
             return (angles.firstAngle+360)%360;
         }
 
-        public double getError(double targetAngle){
-            double angleError = 0;
 
-            angleError = (targetAngle - getHeading());
-            angleError -= (360*Math.floor(0.5+((angleError)/360.0)));
+//        public double getError(double targetAngle){
+//            double angleError = 0;
+//
+//            angleError = (targetAngle - getHeading());
+//            angleError -= (360*Math.floor(0.5+((angleError)/360.0)));
+//
+//            return angleError;
+//
+//        }
 
-            return angleError;
+        public double getError(double targetAngle) {
 
+            double robotError;
+
+            // calculate error in -179 to +180 range  (
+            robotError = targetAngle - getHeading();
+//            while (robotError > 180)  robotError -= 360;
+//            while (robotError <= -180) robotError += 360;
+            return robotError;
+        }
+
+        boolean onHeading(double speed, double angle, double PCoeff) {
+            double   error ;
+            double   steer ;
+            boolean  onTarget = false ;
+            double leftSpeed;
+            double rightSpeed;
+
+            // determine turn power based on +/- error
+            error = getError(angle);
+
+            if (Math.abs(error) <= HEADING_THRESHOLD) {
+                steer = 0.0;
+                leftSpeed  = 0.0;
+                rightSpeed = 0.0;
+                onTarget = true;
+            }
+            else {
+                steer = getSteer(error, PCoeff);
+                rightSpeed  = speed * steer;
+                leftSpeed   = -rightSpeed;
+            }
+
+            // Send desired speeds to motors.
+//            leftDrive.setPower(leftSpeed);
+//            rightDrive.setPower(rightSpeed);
+
+            // Display it for the driver.
+            telemetry.addData("Target", "%5.2f", angle);
+            telemetry.addData("Err/St", "%5.2f/%5.2f", error, steer);
+            telemetry.addData("Speed.", "%5.2f:%5.2f", leftSpeed, rightSpeed);
+
+            return onTarget;
+        }
+
+        public double getSteer(double error, double PCoeff) {
+            return Range.clip(error * PCoeff, -1, 1);
+        }
+
+        public void gyroTurn( double speed, double angle) {
+
+            // keep looping while we are still active, and not on heading.
+            while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
+                // Update telemetry & Allow time for other processes to run.
+                telemetry.update();
+            }
         }
 
 
