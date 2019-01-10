@@ -36,14 +36,19 @@ public class Test2 extends OpMode {
         m2.setPower(m2power);
 
         if(gamepad1.dpad_up) {
-            s1.setPosition(0.9);
-            s2.setPosition(0.1);
+            s1.setPosition(0.90);
+            s2.setPosition(0.10);
         }
 
         if(gamepad1.dpad_down) {
-            s1.setPosition(0.25);
-            s2.setPosition(0.75);
+            s1.setPosition(0.35);
+            s2.setPosition(0.65);
         }
+
+        telemetry.addData("s1 position", s1.getPosition());
+        telemetry.addData("s2 position", s2.getPosition());
+
+
 
 //        s1.setPosition(m1power*0.5+0.5);
 
