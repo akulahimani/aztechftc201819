@@ -129,29 +129,38 @@ public class Autonomous extends OpMode {
 
     @Override
     public void start() {
-        double firstStraightDistance = 0;
-        double firstTurntoLeft = 0;
+        double firstStraightDistance = 43.5;
+        double firstTurntoLeft = 30;
+        double firstTurntoLeftAngle = 45;
         double turnBacktoCenter = 0;
+        double turnBacktoCenterAngle = 45;
         double firstTurntoRight = 0;
-        double secondStraightDistance = 0;
-        double firstReverseDistance = 0;
+        double firstTurntoRightAngle = 45;
+        double secondStraightDistance = 15;
+        double firstReverseDistance = 15;
         double secondTurntoLeft = 0;
+        double secondTurntoLeftAngle = 45;
         double secondTurntoRight = 0;
+        double secondTurntoRightAngle = 45;
         double turnBack = 0;
-        double thirdStraightDistance = 0;
+        double turnBackAngle = 60;
+        double thirdStraightDistance = 43.5;
         double secondTurnBack = 0;
+        double secondTurnBackAngle = 35;
+        double fourthStraightDistance = 43.5;
         double thirdTurnBack = 0;
-        double fourthStraightDistance = 0;
-        double fifthStraightDistance = 0;
+        double thirdTurnBackAngle = 180;
+        double fifthStraightDistance = 117.5;
 
         // Start the logging of measured acceleration
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
         driveForwardTargetDistance(firstStraightDistance);
         turnLeftbyDistance(firstTurntoLeft);
-
+//        gyroTurn(0.1, 315);
+        ///
         try {
-            sleep(2000);
+            sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -177,7 +186,7 @@ public class Autonomous extends OpMode {
             turnRightbyDistance(turnBacktoCenter);
 
             try {
-                sleep(2000);
+                sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -200,7 +209,7 @@ public class Autonomous extends OpMode {
                 turnRightbyDistance(firstTurntoRight);
 
                 try {
-                    sleep(2000);
+                    sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

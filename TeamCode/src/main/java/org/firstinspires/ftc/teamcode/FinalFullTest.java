@@ -48,6 +48,8 @@ public class FinalFullTest extends OpMode {
     @Override
     public void loop() {
         telemetry.addData("Motor Position", m5.getCurrentPosition());
+        telemetry.addData("Servo 1 Position", s1.getPosition());
+        telemetry.addData("Servo 2 Position", s2.getPosition());
         double m5power = -gamepad2.left_stick_y;
         double m2power = -gamepad2.right_stick_y;
 
@@ -101,13 +103,19 @@ public class FinalFullTest extends OpMode {
         }
 
         if(gamepad2.dpad_up) {
-            s1.setPosition(0.90);
-            s2.setPosition(0.10);
+           s1.setPosition(0.35);
+           s2.setPosition(0.65);
+
+//            s1.setPosition(1);
+//            s2.setPosition(0);
         }
 
         if(gamepad2.dpad_down) {
-            s1.setPosition(0.35);
-            s2.setPosition(0.65);
+            s1.setPosition(0);
+            s2.setPosition(1);
+
+//            s1.setPosition(0);
+//            s2.setPosition(1);
         }
 
         if(gamepad1.a) {
