@@ -269,6 +269,11 @@ public class Autonomous extends OpMode {
         motorRightFront.setPower(0.5);
         motorLeftBack.setPower(0.5);
         motorRightBack.setPower(0.5);
+
+        motorLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorLeftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void driveBackwardTargetDistance(double distance) {
@@ -295,6 +300,11 @@ public class Autonomous extends OpMode {
         motorRightFront.setPower(0.5);
         motorLeftBack.setPower(0.5);
         motorRightBack.setPower(0.5);
+
+        motorLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorLeftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void turnLeftbyDistance(double leftDistance) {
@@ -322,6 +332,12 @@ public class Autonomous extends OpMode {
         motorLeftBack.setPower(-0.5);
         motorRightBack.setPower(0.5);
 
+        motorLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorLeftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
     }
 
     public void turnRightbyDistance(double rightDistance) {
@@ -348,6 +364,11 @@ public class Autonomous extends OpMode {
         motorRightFront.setPower(-0.5);
         motorLeftBack.setPower(0.5);
         motorRightBack.setPower(-0.5);
+
+        motorLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorLeftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorRightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
 

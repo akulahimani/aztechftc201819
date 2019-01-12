@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+import static java.lang.Thread.sleep;
+
 @TeleOp(name="Final Full Test", group="Pushbot")
 public class FinalFullTest extends OpMode {
 
@@ -58,11 +60,11 @@ public class FinalFullTest extends OpMode {
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
 
-        motorRightFront.setPower(0.85 * right);
-        motorRightBack.setPower(0.85*right);
+        motorRightFront.setPower(0.75*0.85 * right);
+        motorRightBack.setPower(0.75*0.85*right);
 
-        motorLeftFront.setPower(1 * left);
-        motorLeftBack.setPower(1*left);
+        motorLeftFront.setPower(0.75 * left);
+        motorLeftBack.setPower(0.75*left);
 
 //       double m2power = -gamepad1.right_stick_y;
 
@@ -83,14 +85,19 @@ public class FinalFullTest extends OpMode {
         }
 //        m2.setPower(m2power);
 
-        if(gamepad1.dpad_up) {
+        if(gamepad1.dpad_down) {
             servo1.setPosition(0.9);
             servo2.setPosition(0.1);
         }
 
-        if(gamepad1.dpad_down) {
-            servo1.setPosition(0.25);
-            servo2.setPosition(0.75);
+        if(gamepad1.dpad_up) {
+            servo1.setPosition(0.2);
+            servo2.setPosition(0.8);
+        }
+
+        if(gamepad2.right_bumper) {
+            servo1.setPosition(0.8);
+            servo2.setPosition(0.2);
         }
 
         if(gamepad2.dpad_up) {
@@ -101,6 +108,16 @@ public class FinalFullTest extends OpMode {
         if(gamepad2.dpad_down) {
             s1.setPosition(0.35);
             s2.setPosition(0.65);
+        }
+
+        if(gamepad1.a) {
+
+            motorRightFront.setPower(0.85*right);
+            motorRightBack.setPower(0.85*right);
+
+            motorLeftFront.setPower(left);
+            motorLeftBack.setPower(left);
+
         }
 
 
