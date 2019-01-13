@@ -173,10 +173,10 @@ public class Autonomous extends OpMode {
             driveForwardTargetDistance(thirdStraightDistance);
             turnLeftbyDistance(secondTurnBack);
             driveForwardTargetDistance(fourthStraightDistance);
-            ballGrabber1.setPosition(1);
-            ballGrabber2.setPosition(0);
-            ballGrabber1.setPosition(0);
-            ballGrabber2.setPosition(1);
+            ballGrabber1.setPosition(0.9);
+            ballGrabber2.setPosition(0.1);
+            ballGrabber1.setPosition(0.2);
+            ballGrabber2.setPosition(0.8);
             turnLeftbyDistance(thirdTurnBack);
             driveForwardTargetDistance(fifthStraightDistance);
 
@@ -198,10 +198,10 @@ public class Autonomous extends OpMode {
                 driveForwardTargetDistance(thirdStraightDistance);
                 turnLeftbyDistance(secondTurnBack);
                 driveForwardTargetDistance(fourthStraightDistance);
-                ballGrabber1.setPosition(1);
-                ballGrabber2.setPosition(0);
-                ballGrabber1.setPosition(0);
-                ballGrabber2.setPosition(1);
+                ballGrabber1.setPosition(0.9);
+                ballGrabber2.setPosition(0.1);
+                ballGrabber1.setPosition(0.2);
+                ballGrabber2.setPosition(0.8);
                 turnLeftbyDistance(thirdTurnBack);
                 driveForwardTargetDistance(fifthStraightDistance);
             }
@@ -222,10 +222,10 @@ public class Autonomous extends OpMode {
                     driveForwardTargetDistance(thirdStraightDistance);
                     turnLeftbyDistance(secondTurnBack);
                     driveForwardTargetDistance(fourthStraightDistance);
-                    ballGrabber1.setPosition(1);
-                    ballGrabber2.setPosition(0);
-                    ballGrabber1.setPosition(0);
-                    ballGrabber2.setPosition(1);
+                    ballGrabber1.setPosition(0.9);
+                    ballGrabber2.setPosition(0.1);
+                    ballGrabber1.setPosition(0.2);
+                    ballGrabber2.setPosition(0.8);
                     turnLeftbyDistance(thirdTurnBack);
                     driveForwardTargetDistance(fifthStraightDistance);
                 }
