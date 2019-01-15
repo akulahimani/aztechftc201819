@@ -98,8 +98,8 @@ public class FinalFullTest extends OpMode {
         }
 
         if(gamepad2.right_bumper) {
-            servo1.setPosition(0.825);
-            servo2.setPosition(0.175);
+            servo1.setPosition(0.75);
+            servo2.setPosition(0.25);
 //            servo1.setPosition(0.8);
 //            servo2.setPosition(0.2);
         }

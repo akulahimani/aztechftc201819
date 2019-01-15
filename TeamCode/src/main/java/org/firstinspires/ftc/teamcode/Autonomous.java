@@ -57,15 +57,26 @@ public class Autonomous extends OpMode {
 
 
     AngleTest angle = new AngleTest();
-    DcMotor motorRightFront;
+//    DcMotor motorRightFront;
+//    DcMotor motorLeftFront;
+//    DcMotor motorRightBack;
+//    DcMotor motorLeftBack;
+//    DcMotor cascadeLiftMotor;
+//    DcMotor ballRotater;
+//    DcMotor ballPuller;
+//    Servo ballGrabber1;
+//    Servo ballGrabber2;
+
     DcMotor motorLeftFront;
-    DcMotor motorRightBack;
     DcMotor motorLeftBack;
-    DcMotor cascadeLiftMotor;
-    DcMotor ballRotater;
-    DcMotor ballPuller;
-    Servo ballGrabber1;
-    Servo ballGrabber2;
+    DcMotor motorRightFront;
+    DcMotor motorRightBack;
+    DcMotor m5;
+    Servo servo1;
+    Servo servo2;
+    DcMotor m2;
+    Servo s1;
+    Servo s2;
 
 
     @Override
@@ -92,22 +103,40 @@ public class Autonomous extends OpMode {
 
         // Loop and update the dashboard
 
-        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
         motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
-        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
         motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
-        cascadeLiftMotor = hardwareMap.dcMotor.get("cascadeLiftMotor");
-        ballRotater = hardwareMap.dcMotor.get("ballRotater");
-        ballPuller = hardwareMap.dcMotor.get("ballPuller");
-        ballGrabber1 = hardwareMap.servo.get("ballGrabber1");
-        ballGrabber2 = hardwareMap.servo.get("ballGrabber2");
+        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+        m5 = hardwareMap.dcMotor.get("m5");
+
+        servo1 = hardwareMap.servo.get("servo1");
+        servo2 = hardwareMap.servo.get("servo2");
+
+        m2 = hardwareMap.dcMotor.get("m2");
+        s1 = hardwareMap.servo.get("s1");
+        s2 = hardwareMap.servo.get("s2");
+
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
         motorRightFront.setDirection(DcMotor.Direction.FORWARD);
         motorRightBack.setDirection(DcMotor.Direction.FORWARD);
-        cascadeLiftMotor.setDirection(DcMotor.Direction.REVERSE);
-        ballRotater.setDirection(DcMotor.Direction.REVERSE);
-        ballPuller.setDirection(DcMotor.Direction.REVERSE);
+
+//        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+//        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+//        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+//        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+//        cascadeLiftMotor = hardwareMap.dcMotor.get("cascadeLiftMotor");
+//        ballRotater = hardwareMap.dcMotor.get("ballRotater");
+//        ballPuller = hardwareMap.dcMotor.get("ballPuller");
+//        ballGrabber1 = hardwareMap.servo.get("ballGrabber1");
+//        ballGrabber2 = hardwareMap.servo.get("ballGrabber2");
+//        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+//        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+//        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+//        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+//        cascadeLiftMotor.setDirection(DcMotor.Direction.REVERSE);
+//        ballRotater.setDirection(DcMotor.Direction.REVERSE);
+//        ballPuller.setDirection(DcMotor.Direction.REVERSE);
         detector = new GoldAlignDetector();
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
@@ -173,10 +202,10 @@ public class Autonomous extends OpMode {
             driveForwardTargetDistance(thirdStraightDistance);
             turnLeftbyDistance(secondTurnBack);
             driveForwardTargetDistance(fourthStraightDistance);
-            ballGrabber1.setPosition(0.9);
-            ballGrabber2.setPosition(0.1);
-            ballGrabber1.setPosition(0.2);
-            ballGrabber2.setPosition(0.8);
+            servo1.setPosition(0.2);
+            servo2.setPosition(0.8);
+            servo1.setPosition(0.9);
+            servo2.setPosition(0.1);
             turnLeftbyDistance(thirdTurnBack);
             driveForwardTargetDistance(fifthStraightDistance);
 
@@ -198,10 +227,10 @@ public class Autonomous extends OpMode {
                 driveForwardTargetDistance(thirdStraightDistance);
                 turnLeftbyDistance(secondTurnBack);
                 driveForwardTargetDistance(fourthStraightDistance);
-                ballGrabber1.setPosition(0.9);
-                ballGrabber2.setPosition(0.1);
-                ballGrabber1.setPosition(0.2);
-                ballGrabber2.setPosition(0.8);
+                servo1.setPosition(0.2);
+                servo2.setPosition(0.8);
+                servo1.setPosition(0.9);
+                servo2.setPosition(0.1);
                 turnLeftbyDistance(thirdTurnBack);
                 driveForwardTargetDistance(fifthStraightDistance);
             }
@@ -222,10 +251,10 @@ public class Autonomous extends OpMode {
                     driveForwardTargetDistance(thirdStraightDistance);
                     turnLeftbyDistance(secondTurnBack);
                     driveForwardTargetDistance(fourthStraightDistance);
-                    ballGrabber1.setPosition(0.9);
-                    ballGrabber2.setPosition(0.1);
-                    ballGrabber1.setPosition(0.2);
-                    ballGrabber2.setPosition(0.8);
+                    servo1.setPosition(0.2);
+                    servo2.setPosition(0.8);
+                    servo1.setPosition(0.9);
+                    servo2.setPosition(0.1);
                     turnLeftbyDistance(thirdTurnBack);
                     driveForwardTargetDistance(fifthStraightDistance);
                 }
