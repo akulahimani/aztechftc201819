@@ -2,24 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
-import com.disnodeteam.dogecv.DogeCV;
-import com.disnodeteam.dogecv.detectors.roverrukus.SamplingOrderDetector;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-//eatcurry/
+
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -33,8 +22,10 @@ import java.util.Locale;
 
 import static java.lang.Thread.sleep;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousEncoders", group = "Pushbot")
-public class Autonomous extends OpMode {
+//eatcurry/
+
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousTimeBased", group = "Pushbot")
+public class AutonomousTimeBased extends OpMode {
 
     static final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
     static final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.
@@ -44,7 +35,6 @@ public class Autonomous extends OpMode {
     static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
 
     public GoldAlignDetector detector;
-    public double encoderCountsREDDY = 0;
     public double encoderCounts = 537.6;
     public double wheelDiameter = 4;
     public double circumference = wheelDiameter*Math.PI;
@@ -146,8 +136,8 @@ public class Autonomous extends OpMode {
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
         // Optional Tuning
-        detector.alignSize = 100; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
-        detector.alignPosOffset = 35; // How far from center frame to offset this alignment zone.
+        detector.alignSize = 200; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
         detector.downscale = 0.4; // How much to downscale the input frames
 
         //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
@@ -191,10 +181,56 @@ public class Autonomous extends OpMode {
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
 
-        driveForwardTargetDistance(firstStraightDistance);
-//        driveForwardByTime(300);
-//        turnLeftByTime(1300);
-//        driveForwardByTime(900);
+//        driveForwardTargetDistance(firstStraightDistance);
+        driveForwardByTime(50);
+        turnLeftByTime(510);
+        driveForwardByTime(100);
+
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(detector.getAligned() == true) {
+            turnLeftByTime(300);
+            driveForwardFaster(2000);
+        }
+
+        else {
+
+            turnRightbyTime(1900);
+
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if(detector.getAligned() == true) {
+                turnRightbyTime(100);
+                driveForwardFaster(2000);
+            }
+
+            else {
+                turnLeftByTime(400);
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+                driveForwardFaster(2000);
+            }
+
+
+
+        }
+
+
+//        driveForwardByTime(450);
 
 //        turnLeftbyDistance(firstTurntoLeft);
 ////        gyroTurn(0.1, 315);
@@ -318,12 +354,59 @@ public class Autonomous extends OpMode {
 
     }
 
+    public void driveForwardFaster(long milliseconds) {
+
+        motorLeftFront.setPower(0.4);
+        motorLeftBack.setPower(0.4);
+        motorRightFront.setPower(0.4);
+        motorRightBack.setPower(0.4);
+
+        try {
+            sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+
     public void turnLeftByTime(long milliseconds) {
 
         motorLeftFront.setPower(-0.25);
         motorLeftBack.setPower(-0.25);
         motorRightFront.setPower(0.25);
         motorRightBack.setPower(0.25);
+
+        try {
+            sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+    public void turnRightbyTime(long milliseconds) {
+
+        motorLeftFront.setPower(0.25);
+        motorLeftBack.setPower(0.25);
+        motorRightFront.setPower(-0.25);
+        motorRightBack.setPower(-0.25);
 
         try {
             sleep(milliseconds);
@@ -355,9 +438,9 @@ public class Autonomous extends OpMode {
         motorLeftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        motorLeftFront.setTargetPosition((int) counts);
+        motorLeftFront.setTargetPosition((int) negativecounts);
         motorRightFront.setTargetPosition((int) counts);
-        motorLeftBack.setTargetPosition((int) counts);
+        motorLeftBack.setTargetPosition((int) negativecounts);
         motorRightBack.setTargetPosition((int) counts);
 
         motorLeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -365,21 +448,15 @@ public class Autonomous extends OpMode {
         motorLeftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motorLeftFront.setPower(0.5);
+        motorLeftFront.setPower(-0.5);
         motorRightFront.setPower(0.5);
-        motorLeftBack.setPower(0.5);
+        motorLeftBack.setPower(-0.5);
         motorRightBack.setPower(0.5);
 
         motorLeftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorRightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorLeftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorRightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        motorLeftFront.setPower(0);
-        motorRightFront.setPower(0);
-        motorLeftBack.setPower(0);
-        motorRightBack.setPower(0);
-
     }
 
     public void driveBackwardTargetDistance(double distance) {

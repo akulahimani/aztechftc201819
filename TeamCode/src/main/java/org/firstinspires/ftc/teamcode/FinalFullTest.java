@@ -47,6 +47,12 @@ public class FinalFullTest extends OpMode {
 
     @Override
     public void loop() {
+
+        telemetry.addData("Motor Left Front Position", motorLeftFront.getCurrentPosition());
+        telemetry.addData("Motor Right Front Position", motorRightFront.getCurrentPosition());
+        telemetry.addData("Motor Left Back Position", motorLeftBack.getCurrentPosition());
+        telemetry.addData("Motor Right Back Position", motorRightBack.getCurrentPosition());
+
         telemetry.addData("Motor Position", m5.getCurrentPosition());
         telemetry.addData("Servo 1 Position", servo1.getPosition());
         telemetry.addData("Servo 2 Position", servo2.getPosition());
