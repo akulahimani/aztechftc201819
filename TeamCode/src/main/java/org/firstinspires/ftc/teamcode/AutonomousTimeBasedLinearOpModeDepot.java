@@ -5,7 +5,6 @@ import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -21,12 +20,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 import java.util.Locale;
 
-import static java.lang.Thread.sleep;
-
 //eatcurry/
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="OpModeCraterFacing", group = "Pushbot")
-public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="OpModeDepotFacing", group = "Pushbot")
+public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
     static final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
     static final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.
@@ -259,7 +256,7 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
 
 //        driveForwardTargetDistance(firstStraightDistance);
         driveForwardByTime(50);
-        turnLeftByTime(500);
+        turnLeftByTime(400);
         driveForwardByTime(100);
 
         sleep(2000);
@@ -267,7 +264,34 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
 
         if(detector.getAligned() == true) {
             turnLeftByTime(300);
-            driveForwardFaster(2200);
+            driveForwardFaster(1100);
+            turnRightbyTime(1700);
+            driveSlowly(1200);
+
+//            sleep(1000);
+            s1.setPosition(0.35);
+            s2.setPosition(0.65);
+
+            servo1.setPosition(0.1);
+            servo2.setPosition(0.9);
+
+//            driveSlowly(1200);
+
+//            servo1.setPosition(0.9);
+//            servo2.setPosition(0.1);
+
+
+
+//            servo1.setPosition(0.95);
+//            servo2.setPosition(0.005);
+
+//            driveForwardByTime(900);
+
+//            sleep(1000);
+
+
+
+
         }
 
         else {
@@ -278,15 +302,15 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
 
             if(detector.getAligned() == true) {
                 turnLeftByTime(200);
-                driveForwardFaster(2300);
+                driveForwardFaster(1150);
             }
 
             else {
-                turnLeftByTime(1100);
+                turnLeftByTime(1200);
 
                 sleep(1000);
 
-                driveForwardEvenFaster(1400);
+                driveForwardEvenFaster(700);
             }
 
             while(opModeIsActive()) {
@@ -583,6 +607,25 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
         motorRightBack.setPower(0.4);
 
    sleep(milliseconds);
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+    public void driveSlowly(long milliseconds) {
+
+        motorLeftFront.setPower(0.2);
+        motorLeftBack.setPower(0.2);
+        motorRightFront.setPower(0.2);
+        motorRightBack.setPower(0.2);
+
+        sleep(milliseconds);
 
         motorLeftFront.setPower(0);
         motorLeftBack.setPower(0);
