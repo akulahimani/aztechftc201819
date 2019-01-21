@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.app.ApplicationErrorReport;
+
 import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -7,7 +9,9 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Func;
@@ -41,6 +45,10 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
     public double circumference = wheelDiameter*Math.PI;
     public double gearRatio = 1;
     BNO055IMU imu;
+
+//   VoltageSensor voltSensor = hardwareMap.voltageSensor.get("Motor Controller 1");
+//    double voltage = voltSensor.getVoltage();
+
 
     // State used for updating telemetry
     Orientation angles;
@@ -149,7 +157,6 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
         detector.ratioScorer.perfectRatio = 1.0;
 
         detector.enable();
-
 
 //        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 //        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
