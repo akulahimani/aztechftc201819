@@ -346,7 +346,7 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
                 turnLeftByTime(200);
                 driveForwardFaster(1150);
                 turnLeftByTime(2500);
-                driveForwardByTime(500);
+                driveForwardByTime(800);
 
                 sleep(1000);
 
@@ -380,7 +380,7 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
                 teamMarker.setPosition(0.15);
 
 
-                
+
 
 
                 turnLeftByTime(2150);
