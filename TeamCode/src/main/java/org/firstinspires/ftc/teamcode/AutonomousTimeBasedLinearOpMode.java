@@ -76,6 +76,7 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
     DcMotor m2;
     Servo s1;
     Servo s2;
+    Servo teamMarker;
 
 
     @Override
@@ -114,6 +115,7 @@ public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
         m2 = hardwareMap.dcMotor.get("m2");
         s1 = hardwareMap.servo.get("s1");
         s2 = hardwareMap.servo.get("s2");
+        teamMarker = hardwareMap.servo.get("teamMarker");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);

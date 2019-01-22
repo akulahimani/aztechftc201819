@@ -21,6 +21,7 @@ public class FinalFullTest extends OpMode {
     DcMotor m2;
     Servo s1;
     Servo s2;
+    Servo teamMarker;
 
 
     @Override
@@ -37,6 +38,7 @@ public class FinalFullTest extends OpMode {
         m2 = hardwareMap.dcMotor.get("m2");
         s1 = hardwareMap.servo.get("s1");
         s2 = hardwareMap.servo.get("s2");
+        teamMarker = hardwareMap.servo.get("teamMarker");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
@@ -60,7 +62,7 @@ public class FinalFullTest extends OpMode {
         double m2power = -gamepad2.right_stick_y;
 
         double throttle = -gamepad1.left_stick_y;
-        double direction = gamepad1.right_stick_x;
+        double direction = gamepad1.right_stick_y;
 
         double right = throttle - direction;
         double left = (throttle + direction);
@@ -113,8 +115,14 @@ public class FinalFullTest extends OpMode {
         if(gamepad2.left_bumper) {
             servo1.setPosition(0.95);
             servo2.setPosition(0.025);
+        }
 
+        if(gamepad1.a) {
+            teamMarker.setPosition(0.25);
+        }
 
+        if(gamepad1.b) {
+            teamMarker.setPosition(0.75);
         }
 
         if(gamepad2.dpad_up) {

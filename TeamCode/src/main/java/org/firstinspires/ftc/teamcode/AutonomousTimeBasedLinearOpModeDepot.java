@@ -65,6 +65,8 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
     DcMotor m2;
     Servo s1;
     Servo s2;
+    Servo teamMarker;
+
 
 
     @Override
@@ -103,6 +105,7 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
         m2 = hardwareMap.dcMotor.get("m2");
         s1 = hardwareMap.servo.get("s1");
         s2 = hardwareMap.servo.get("s2");
+        teamMarker = hardwareMap.servo.get("teamMarker");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
@@ -266,14 +269,53 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
             turnLeftByTime(300);
             driveForwardFaster(1100);
             turnRightbyTime(1700);
-            driveSlowly(1200);
+            driveForwardByTime(1200);
+            turnLeftByTime(2300);
+            driveForwardByTime(300);
+
+
+
+
+//            driveSlowly(1200);
 
 //            sleep(1000);
-            s1.setPosition(0.35);
-            s2.setPosition(0.65);
+//            s1.setPosition(0.35);
+//            s2.setPosition(0.65);
+//
+//            servo1.setPosition(0.1);
+//            servo2.setPosition(0.9);
 
-            servo1.setPosition(0.1);
-            servo2.setPosition(0.9);
+//            sleep(500);
+
+            sleep(1000);
+
+//            teamMarker.setDirection(Servo.Direction.REVERSE);
+            teamMarker.setPosition(0.15);
+
+
+//            teamMarker.setPosition(0.75);
+
+//            sleep(1000);
+
+
+            turnLeftByTime(2150);
+
+            sleep(1000);
+
+            driveForwardByTime(2500);
+
+            turnRightbyTime(300);
+
+            driveForwardFaster(1000);
+
+
+
+
+
+
+//            sleep(1000);
+//
+//            teamMarker.setPosition(0.75);
 
 //            driveSlowly(1200);
 
@@ -303,6 +345,23 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
             if(detector.getAligned() == true) {
                 turnLeftByTime(200);
                 driveForwardFaster(1150);
+                turnLeftByTime(2500);
+                driveForwardByTime(500);
+
+                sleep(1000);
+
+                teamMarker.setPosition(0.15);
+
+
+                turnLeftByTime(2150);
+
+                sleep(1000);
+
+                driveForwardByTime(2500);
+
+                turnRightbyTime(300);
+
+                driveForwardFaster(1000);
             }
 
             else {
@@ -310,7 +369,33 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
                 sleep(1000);
 
-                driveForwardEvenFaster(700);
+                driveForwardEvenFaster(900);
+
+                turnLeftByTime(1300);
+
+                driveForwardByTime(500);
+
+                sleep(1000);
+
+                teamMarker.setPosition(0.15);
+
+
+                
+
+
+                turnLeftByTime(2150);
+
+                sleep(1000);
+
+                driveForwardByTime(2500);
+
+                turnRightbyTime(300);
+
+                driveForwardFaster(1000);
+
+
+
+
             }
 
             while(opModeIsActive()) {
