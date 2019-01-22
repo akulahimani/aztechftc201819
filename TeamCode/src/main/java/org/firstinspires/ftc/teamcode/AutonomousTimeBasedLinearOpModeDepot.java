@@ -259,7 +259,9 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
 //        driveForwardTargetDistance(firstStraightDistance);
         driveForwardByTime(50);
+
         turnLeftByTime(400);
+
         driveForwardByTime(100);
 
         sleep(2000);
@@ -267,36 +269,20 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
         if(detector.getAligned() == true) {
             turnLeftByTime(300);
+
             driveForwardFaster(1100);
+
             turnRightbyTime(1700);
+
             driveForwardByTime(1200);
+
             turnLeftByTime(2300);
+
             driveForwardByTime(300);
-
-
-
-
-//            driveSlowly(1200);
-
-//            sleep(1000);
-//            s1.setPosition(0.35);
-//            s2.setPosition(0.65);
-//
-//            servo1.setPosition(0.1);
-//            servo2.setPosition(0.9);
-
-//            sleep(500);
 
             sleep(1000);
 
-//            teamMarker.setDirection(Servo.Direction.REVERSE);
             teamMarker.setPosition(0.15);
-
-
-//            teamMarker.setPosition(0.75);
-
-//            sleep(1000);
-
 
             turnLeftByTime(2150);
 
@@ -344,14 +330,16 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
             if(detector.getAligned() == true) {
                 turnLeftByTime(200);
+
                 driveForwardFaster(1150);
+
                 turnLeftByTime(2500);
+
                 driveForwardByTime(800);
 
                 sleep(1000);
 
                 teamMarker.setPosition(0.15);
-
 
                 turnLeftByTime(2150);
 
@@ -379,10 +367,6 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
                 teamMarker.setPosition(0.15);
 
-
-
-
-
                 turnLeftByTime(2150);
 
                 sleep(1000);
@@ -393,13 +377,11 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
                 driveForwardFaster(1000);
 
-
-
-
             }
 
             while(opModeIsActive()) {
 
+                idle();
                 telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
                 telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
                 telemetry.addData("Left Back Motor Position", motorLeftBack.getCurrentPosition());
