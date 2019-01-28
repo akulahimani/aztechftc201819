@@ -4,8 +4,7 @@ import com.disnodeteam.dogecv.CameraViewDisplay;
 import com.disnodeteam.dogecv.detectors.roverrukus.GoldAlignDetector;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -21,13 +20,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 import java.util.Locale;
 
-import static java.lang.Thread.sleep;
-
 //eatcurry/
 
-@Disabled
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousTimeBased", group = "Pushbot")
-public class AutonomousTimeBased extends OpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="OpModeCraterFacingWithMarker", group = "Pushbot")
+public class AutonomousTimeBasedLinearOpModeCraterWithMarker extends LinearOpMode {
 
     static final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
     static final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.
@@ -42,6 +38,10 @@ public class AutonomousTimeBased extends OpMode {
     public double circumference = wheelDiameter*Math.PI;
     public double gearRatio = 1;
     BNO055IMU imu;
+
+//   VoltageSensor voltSensor = hardwareMap.voltageSensor.get("Motor Controller 1");
+//    double voltage = voltSensor.getVoltage();
+
 
     // State used for updating telemetry
     Orientation angles;
@@ -69,10 +69,11 @@ public class AutonomousTimeBased extends OpMode {
     DcMotor m2;
     Servo s1;
     Servo s2;
+    Servo teamMarker;
 
 
     @Override
-    public void init() {
+    public void runOpMode() throws InterruptedException {
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -107,6 +108,7 @@ public class AutonomousTimeBased extends OpMode {
         m2 = hardwareMap.dcMotor.get("m2");
         s1 = hardwareMap.servo.get("s1");
         s2 = hardwareMap.servo.get("s2");
+        teamMarker = hardwareMap.servo.get("teamMarker");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
@@ -138,7 +140,7 @@ public class AutonomousTimeBased extends OpMode {
         detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
         detector.useDefaults();
         // Optional Tuning
-        detector.alignSize = 200; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+        detector.alignSize = 300; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
         detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
         detector.downscale = 0.4; // How much to downscale the input frames
 
@@ -151,11 +153,85 @@ public class AutonomousTimeBased extends OpMode {
 
         detector.enable();
 
+//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+//        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+//        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+//        parameters.loggingEnabled      = true;
+//        parameters.loggingTag          = "IMU";
+//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+//
+//        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+//        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+//        // and named "imu".
+//        imu = hardwareMap.get(BNO055IMU.class, "imu");
+//        imu.initialize(parameters);
+//
+//        // Set up our telemetry dashboard
+//        composeTelemetry();
+//
+//        // Wait until we're told to go
+//
+//        // Loop and update the dashboard
+//
+//        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+//        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+//        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+//        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+//        m5 = hardwareMap.dcMotor.get("m5");
+//
+//        servo1 = hardwareMap.servo.get("servo1");
+//        servo2 = hardwareMap.servo.get("servo2");
+//
+//        m2 = hardwareMap.dcMotor.get("m2");
+//        s1 = hardwareMap.servo.get("s1");
+//        s2 = hardwareMap.servo.get("s2");
+//
+//        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+//        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+//        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+//        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+//
+////        motorLeftFront.setDirection(DcMotor.Direction.FORWARD);
+////        motorLeftBack.setDirection(DcMotor.Direction.FORWARD);
+////        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+////        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+//
+////        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+////        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+////        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+////        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+////        cascadeLiftMotor = hardwareMap.dcMotor.get("cascadeLiftMotor");
+////        ballRotater = hardwareMap.dcMotor.get("ballRotater");
+////        ballPuller = hardwareMap.dcMotor.get("ballPuller");
+////        ballGrabber1 = hardwareMap.servo.get("ballGrabber1");
+////        ballGrabber2 = hardwareMap.servo.get("ballGrabber2");
+////        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+////        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+////        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+////        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+////        cascadeLiftMotor.setDirection(DcMotor.Direction.REVERSE);
+////        ballRotater.setDirection(DcMotor.Direction.REVERSE);
+////        ballPuller.setDirection(DcMotor.Direction.REVERSE);
+//        detector = new GoldAlignDetector();
+//        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+//        detector.useDefaults();
+//        // Optional Tuning
+//        detector.alignSize = 200; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+//        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+//        detector.downscale = 0.4; // How much to downscale the input frames
+//
+//        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+//        detector.perfectAreaScorer.perfectArea = 1000; // if using PERFECT_AREA scoring
+//        detector.maxAreaScorer.weight = 0.005;
+//
+//        detector.ratioScorer.weight = 5;
+//        detector.ratioScorer.perfectRatio = 1.0;
+//
+//        detector.enable();
 
-    }
+        waitForStart();
 
-    @Override
-    public void start() {
         double firstStraightDistance = 12;
         double firstTurntoLeft = 30;
         double firstTurntoLeftAngle = 45;
@@ -185,51 +261,262 @@ public class AutonomousTimeBased extends OpMode {
 
 //        driveForwardTargetDistance(firstStraightDistance);
         driveForwardByTime(50);
-        turnLeftByTime(510);
+        turnLeftByTime(500);
         driveForwardByTime(100);
 
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(2000);
+
 
         if(detector.getAligned() == true) {
             turnLeftByTime(300);
-            driveForwardFaster(2000);
+            driveForwardFaster(1100);
+            driveBackwardFaster(1100);
+            turnLeftByTime(800);
+            driveForwardFaster(1300);
+            turnLeftbyDistance(600);
+            driveForwardFaster(800);
+            sleep(1000);
+
+            teamMarker.setPosition(0.15);
+
+            turnLeftByTime(2150);
+
+            sleep(1000);
+
+            driveForwardByTime(2500);
+
+            turnLeftByTime(300);
+
+            driveForwardFaster(1000);
         }
 
         else {
 
             turnRightbyTime(1900);
 
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
 
             if(detector.getAligned() == true) {
-                turnRightbyTime(100);
-                driveForwardFaster(2000);
+                turnLeftByTime(200);
+                driveForwardFaster(1100);
+                driveBackwardFaster(1100);
+                turnLeftByTime(1000);
+
+                driveForwardFaster(1300);
+                turnLeftbyDistance(600);
+                driveForwardFaster(800);
+                sleep(1000);
+
+                teamMarker.setPosition(0.15);
+
+                turnLeftByTime(2150);
+
+                sleep(1000);
+
+                driveForwardByTime(2500);
+
+                turnLeftByTime(300);
+
+                driveForwardFaster(1000);
+
             }
 
             else {
-                turnLeftByTime(400);
+                turnLeftByTime(1100);
 
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                sleep(1000);
+
+                driveForwardEvenFaster(700);
+
+                driveBackwardEvenFaster(700);
+
+                turnLeftByTime(900);
+
+                driveForwardFaster(1300);
+                turnLeftbyDistance(600);
+                driveForwardFaster(800);
+                sleep(1000);
+
+                teamMarker.setPosition(0.15);
+
+                turnLeftByTime(2150);
+
+                sleep(1000);
+
+                driveForwardByTime(2500);
+
+                turnLeftByTime(300);
+
+                driveForwardFaster(1000);
 
 
-                driveForwardFaster(2000);
             }
 
+            while(opModeIsActive()) {
 
+                idle();
+                telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
+                telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
+                telemetry.addData("Left Back Motor Position", motorLeftBack.getCurrentPosition());
+                telemetry.addData("Left Front Motor Position", motorLeftFront.getCurrentPosition());
+                telemetry.addData("Right Back Motor Position", motorRightBack.getCurrentPosition());
+                telemetry.addData("Right Front Motor Position", motorRightFront.getCurrentPosition());
+                telemetry.addData("First Angle: 0-360", getHeading());
+                telemetry.update();
+
+            }
+
+            detector.disable();
 
         }
+
+//    @Override
+//    public void init() {
+//
+////        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+////        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+////        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+////        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+////        parameters.loggingEnabled      = true;
+////        parameters.loggingTag          = "IMU";
+////        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+////
+////        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+////        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+////        // and named "imu".
+////        imu = hardwareMap.get(BNO055IMU.class, "imu");
+////        imu.initialize(parameters);
+////
+////        // Set up our telemetry dashboard
+////        composeTelemetry();
+////
+////        // Wait until we're told to go
+////
+////        // Loop and update the dashboard
+////
+////        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+////        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+////        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+////        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+////        m5 = hardwareMap.dcMotor.get("m5");
+////
+////        servo1 = hardwareMap.servo.get("servo1");
+////        servo2 = hardwareMap.servo.get("servo2");
+////
+////        m2 = hardwareMap.dcMotor.get("m2");
+////        s1 = hardwareMap.servo.get("s1");
+////        s2 = hardwareMap.servo.get("s2");
+////
+////        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+////        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+////        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+////        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+////
+//////        motorLeftFront.setDirection(DcMotor.Direction.FORWARD);
+//////        motorLeftBack.setDirection(DcMotor.Direction.FORWARD);
+//////        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+//////        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+////
+//////        motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+//////        motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+//////        motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+//////        motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+//////        cascadeLiftMotor = hardwareMap.dcMotor.get("cascadeLiftMotor");
+//////        ballRotater = hardwareMap.dcMotor.get("ballRotater");
+//////        ballPuller = hardwareMap.dcMotor.get("ballPuller");
+//////        ballGrabber1 = hardwareMap.servo.get("ballGrabber1");
+//////        ballGrabber2 = hardwareMap.servo.get("ballGrabber2");
+//////        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+//////        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+//////        motorRightFront.setDirection(DcMotor.Direction.FORWARD);
+//////        motorRightBack.setDirection(DcMotor.Direction.FORWARD);
+//////        cascadeLiftMotor.setDirection(DcMotor.Direction.REVERSE);
+//////        ballRotater.setDirection(DcMotor.Direction.REVERSE);
+//////        ballPuller.setDirection(DcMotor.Direction.REVERSE);
+////        detector = new GoldAlignDetector();
+////        detector.init(hardwareMap.appContext, CameraViewDisplay.getInstance());
+////        detector.useDefaults();
+////        // Optional Tuning
+////        detector.alignSize = 200; // How wide (in pixels) is the range in which the gold object will be aligned. (Represented by green bars in the preview)
+////        detector.alignPosOffset = 0; // How far from center frame to offset this alignment zone.
+////        detector.downscale = 0.4; // How much to downscale the input frames
+////
+////        //detector.areaScoringMethod = DogeCV.AreaScoringMethod.MAX_AREA; // Can also be PERFECT_AREA
+////        detector.perfectAreaScorer.perfectArea = 1000; // if using PERFECT_AREA scoring
+////        detector.maxAreaScorer.weight = 0.005;
+////
+////        detector.ratioScorer.weight = 5;
+////        detector.ratioScorer.perfectRatio = 1.0;
+////
+////        detector.enable();
+//
+//
+//    }
+
+//    @Override
+//    public void start() {
+////        double firstStraightDistance = 12;
+////        double firstTurntoLeft = 30;
+////        double firstTurntoLeftAngle = 45;
+////        double turnBacktoCenter = 0;
+////        double turnBacktoCenterAngle = 45;
+////        double firstTurntoRight = 0;
+////        double firstTurntoRightAngle = 45;
+////        double secondStraightDistance = 15;
+////        double firstReverseDistance = 15;
+////        double secondTurntoLeft = 0;
+////        double secondTurntoLeftAngle = 45;
+////        double secondTurntoRight = 0;
+////        double secondTurntoRightAngle = 45;
+////        double turnBack = 0;
+////        double turnBackAngle = 60;
+////        double thirdStraightDistance = 43.5;
+////        double secondTurnBack = 0;
+////        double secondTurnBackAngle = 35;
+////        double fourthStraightDistance = 43.5;
+////        double thirdTurnBack = 0;
+////        double thirdTurnBackAngle = 180;
+////        double fifthStraightDistance = 117.5;
+////
+////        // Start the logging of measured acceleration
+////        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+////
+////
+//////        driveForwardTargetDistance(firstStraightDistance);
+////        driveForwardByTime(50);
+////        turnLeftByTime(510);
+////        driveForwardByTime(100);
+////
+////        sleep(2000);
+////
+////
+////        if(detector.getAligned() == true) {
+////            turnLeftByTime(300);
+////            driveForwardFaster(2000);
+////        }
+////
+////        else {
+////
+////            turnRightbyTime(1900);
+////
+////            sleep(1000);
+////
+////            if(detector.getAligned() == true) {
+////                turnRightbyTime(100);
+////                driveForwardFaster(2000);
+////            }
+////
+////            else {
+////                turnLeftByTime(400);
+////
+////         sleep(1000);
+////
+////                driveForwardFaster(2000);
+////            }
+////
+//
+//
+//        }
 
 
 //        driveForwardByTime(450);
@@ -313,25 +600,25 @@ public class AutonomousTimeBased extends OpMode {
 
     }
 
-    @Override
-    public void loop() {
+//    @Override
+//    public void loop() {
+//
+//        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
+//        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
+//        telemetry.addData("Left Back Motor Position", motorLeftBack.getCurrentPosition());
+//        telemetry.addData("Left Front Motor Position", motorLeftFront.getCurrentPosition());
+//        telemetry.addData("Right Back Motor Position", motorRightBack.getCurrentPosition());
+//        telemetry.addData("Right Front Motor Position", motorRightFront.getCurrentPosition());
+//        telemetry.addData("First Angle: 0-360", getHeading());
+//        telemetry.update();
+//
+//    }
 
-        telemetry.addData("IsAligned" , detector.getAligned()); // Is the bot aligned with the gold mineral
-        telemetry.addData("X Pos" , detector.getXPosition()); // Gold X pos.
-        telemetry.addData("Left Back Motor Position", motorLeftBack.getCurrentPosition());
-        telemetry.addData("Left Front Motor Position", motorLeftFront.getCurrentPosition());
-        telemetry.addData("Right Back Motor Position", motorRightBack.getCurrentPosition());
-        telemetry.addData("Right Front Motor Position", motorRightFront.getCurrentPosition());
-        telemetry.addData("First Angle: 0-360", getHeading());
-        telemetry.update();
-
-    }
-
-    @Override
-    public void stop() {
-
-        detector.disable();
-    }
+//    @Override
+//    public void stop() {
+//
+//        detector.disable();
+//    }
 
     public void driveForwardByTime(long milliseconds) {
 
@@ -340,11 +627,7 @@ public class AutonomousTimeBased extends OpMode {
         motorRightFront.setPower(0.25);
         motorRightBack.setPower(0.25);
 
-        try {
-            sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    sleep(milliseconds);
 
         motorLeftFront.setPower(0);
         motorLeftBack.setPower(0);
@@ -363,11 +646,64 @@ public class AutonomousTimeBased extends OpMode {
         motorRightFront.setPower(0.4);
         motorRightBack.setPower(0.4);
 
-        try {
-            sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+   sleep(milliseconds);
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+    public void driveBackwardFaster(long milliseconds) {
+
+        motorLeftFront.setPower(-0.4);
+        motorLeftBack.setPower(-0.4);
+        motorRightFront.setPower(-0.4);
+        motorRightBack.setPower(-0.4);
+
+        sleep(milliseconds);
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+    public void driveBackwardEvenFaster(long milliseconds) {
+
+        motorLeftFront.setPower(-0.5);
+        motorLeftBack.setPower(-0.5);
+        motorRightFront.setPower(-0.5);
+        motorRightBack.setPower(-0.5);
+
+        sleep(milliseconds);
+
+        motorLeftFront.setPower(0);
+        motorLeftBack.setPower(0);
+        motorRightFront.setPower(0);
+        motorRightBack.setPower(0);
+
+
+
+
+    }
+
+    public void driveForwardEvenFaster(long milliseconds) {
+
+        motorLeftFront.setPower(0.5);
+        motorLeftBack.setPower(0.5);
+        motorRightFront.setPower(0.5);
+        motorRightBack.setPower(0.5);
+
+        sleep(milliseconds);
 
         motorLeftFront.setPower(0);
         motorLeftBack.setPower(0);
@@ -382,46 +718,33 @@ public class AutonomousTimeBased extends OpMode {
 
     public void turnLeftByTime(long milliseconds) {
 
-        motorLeftFront.setPower(-0.25);
-        motorLeftBack.setPower(-0.25);
-        motorRightFront.setPower(0.25);
-        motorRightBack.setPower(0.25);
+        motorLeftFront.setPower(-0.4);
+        motorLeftBack.setPower(-0.4);
+        motorRightFront.setPower(0.4);
+        motorRightBack.setPower(0.4);
 
-        try {
-            sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(milliseconds);
 
         motorLeftFront.setPower(0);
         motorLeftBack.setPower(0);
         motorRightFront.setPower(0);
         motorRightBack.setPower(0);
-
-
-
 
     }
 
     public void turnRightbyTime(long milliseconds) {
 
-        motorLeftFront.setPower(0.25);
-        motorLeftBack.setPower(0.25);
-        motorRightFront.setPower(-0.25);
-        motorRightBack.setPower(-0.25);
+        motorLeftFront.setPower(0.4);
+        motorLeftBack.setPower(0.4);
+        motorRightFront.setPower(-0.4);
+        motorRightBack.setPower(-0.4);
 
-        try {
-            sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    sleep(milliseconds);
 
         motorLeftFront.setPower(0);
         motorLeftBack.setPower(0);
         motorRightFront.setPower(0);
         motorRightBack.setPower(0);
-
-
 
 
     }

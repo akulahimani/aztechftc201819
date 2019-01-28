@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import static java.lang.Thread.sleep;
 
+@Disabled
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="AutonomousEncoders", group = "Pushbot")
 public class Autonomous extends OpMode {
 

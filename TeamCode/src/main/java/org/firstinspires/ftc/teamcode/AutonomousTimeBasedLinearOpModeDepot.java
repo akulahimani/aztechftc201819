@@ -260,7 +260,7 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 //        driveForwardTargetDistance(firstStraightDistance);
         driveForwardByTime(50);
 
-        turnLeftByTime(400);
+        turnLeftByTime(225);
 
         driveForwardByTime(100);
 
@@ -268,31 +268,31 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
 
         if(detector.getAligned() == true) {
-            turnLeftByTime(300);
+            turnLeftByTime(200);
 
             driveForwardFaster(1100);
 
-            turnRightbyTime(1700);
+            turnRightbyTime(800);
 
             driveForwardByTime(1200);
 
-            turnLeftByTime(2300);
-
-            driveForwardByTime(300);
+//            turnLeftByTime(1100);
+//
+//            driveForwardByTime(300);
 
             sleep(1000);
 
             teamMarker.setPosition(0.15);
 
-            turnLeftByTime(2150);
+            turnLeftByTime(2100);
 
             sleep(1000);
 
-            driveForwardByTime(2500);
+            driveForwardByTime(2000);
 
             turnRightbyTime(300);
 
-            driveForwardFaster(1000);
+            driveForwardFaster(800);
 
 
 
@@ -324,58 +324,58 @@ public class AutonomousTimeBasedLinearOpModeDepot extends LinearOpMode {
 
         else {
 
-            turnRightbyTime(1900);
+            turnRightbyTime(600);
 
             sleep(1000);
 
             if(detector.getAligned() == true) {
-                turnLeftByTime(200);
+                turnLeftByTime(50);
 
                 driveForwardFaster(1150);
 
-                turnLeftByTime(2500);
+                turnLeftByTime(1100);
 
-                driveForwardByTime(800);
+                driveForwardByTime(1200);
 
                 sleep(1000);
 
                 teamMarker.setPosition(0.15);
 
-                turnLeftByTime(2150);
+                turnLeftByTime(700);
 
                 sleep(1000);
 
-                driveForwardByTime(2500);
+                driveForwardByTime(1500);
 
-                turnRightbyTime(300);
+                turnRightbyTime(100);
 
-                driveForwardFaster(1000);
+                driveForwardFaster(800);
             }
 
             else {
-                turnLeftByTime(1200);
+                turnLeftByTime(350);
 
                 sleep(1000);
 
-                driveForwardEvenFaster(900);
+                driveForwardEvenFaster(1000);
 
-                turnLeftByTime(1300);
+                turnLeftByTime(1700);
 
-                driveForwardByTime(500);
+//                driveForwardByTime(500);
 
                 sleep(1000);
 
                 teamMarker.setPosition(0.15);
 
-                turnLeftByTime(2150);
+//                turnLeftByTime(1000);
 
-                sleep(1000);
-
-                driveForwardByTime(2500);
+//                sleep(1000);
+//
+                driveForwardByTime(1500);
 
                 turnRightbyTime(300);
 
-                driveForwardFaster(1000);
+                driveForwardFaster(800);
 
             }
 

@@ -30,7 +30,7 @@ import static java.lang.Thread.sleep;
 //eatcurry/
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="OpModeCraterFacing", group = "Pushbot")
-public class AutonomousTimeBasedLinearOpMode extends LinearOpMode {
+public class AutonomousTimeBasedLinearOpModeCrater extends LinearOpMode {
 
     static final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
     static final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.

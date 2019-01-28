@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Thread.sleep;
 
-@TeleOp(name="Final Full Test", group="Pushbot")
+@TeleOp(name="Tele Op", group="Pushbot")
 public class FinalFullTest extends OpMode {
 
     DcMotor motorLeftFront;
@@ -61,8 +61,11 @@ public class FinalFullTest extends OpMode {
         double m5power = -gamepad2.left_stick_y;
         double m2power = -gamepad2.right_stick_y;
 
+//        double throttle = -gamepad1.left_stick_y;
+//        double direction = gamepad1.right_stick_y;
+
         double throttle = -gamepad1.left_stick_y;
-        double direction = gamepad1.right_stick_y;
+        double direction = gamepad1.right_stick_x;
 
         double right = throttle - direction;
         double left = (throttle + direction);
@@ -106,8 +109,8 @@ public class FinalFullTest extends OpMode {
         }
 
         if(gamepad2.right_bumper) {
-            servo1.setPosition(0.75);
-            servo2.setPosition(0.25);
+            servo1.setPosition(0.5);
+            servo2.setPosition(0.5);
 //            servo1.setPosition(0.8);
 //            servo2.setPosition(0.2);
         }
