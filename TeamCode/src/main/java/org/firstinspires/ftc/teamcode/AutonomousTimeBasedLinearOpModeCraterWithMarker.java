@@ -230,7 +230,12 @@ public class AutonomousTimeBasedLinearOpModeCraterWithMarker extends LinearOpMod
 //
 //        detector.enable();
 
-        waitForStart();
+//        waitForStart();
+        while (!opModeIsActive() && !isStopRequested()) {
+            telemetry.addData("status", "waiting for start command...");
+            telemetry.update();
+        }
+
 
         double firstStraightDistance = 12;
         double firstTurntoLeft = 30;
